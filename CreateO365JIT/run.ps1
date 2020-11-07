@@ -41,7 +41,6 @@ try {
       "password"                      = $Account['password']
     }
   } | ConvertTo-Json
-#New-Output -ReturnedBody $Body
   $CreateUserResult = Invoke-RestMethod -Uri 'https://graph.microsoft.com/v1.0/users' -ContentType 'Application/json' -Method POST -Body $CreateBody -Headers $Headers
 }
 catch {
@@ -63,8 +62,8 @@ $AddGroupResult = Invoke-RestMethod -Uri 'https://graph.microsoft.com/beta/roleM
 New-output -ReturnedBody "Success"
 }
 catch {
-  break
   Add-Content -path $ENV:ErrorLog -Value "$($currentUTCtime): Could not create new O365 JIT Account. Error:  $($_.Exception.Message)" -Force
   New-output -ReturnedBody "Group Add Failure: $($_.Exception.Message)"
+  break
 }
 
