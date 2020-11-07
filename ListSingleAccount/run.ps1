@@ -1,12 +1,6 @@
 using namespace System.Net
 param($Request, $TriggerMetadata)
-function New-output ($ReturnedBody) {
-  Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
-      StatusCode  = [HttpStatusCode]::OK
-      Body        = $ReturnedBody
-      ContentType = 'text/json'
-    }) 
-}
+. .\GenericFunctions.ps1
 $AccountID = $Request.Body.AccountID
 
 try {
