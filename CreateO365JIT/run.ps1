@@ -58,7 +58,7 @@ $GroupBody = [PSCustomObject]@{
   
 $AddGroupResult = Invoke-RestMethod -Uri 'https://graph.microsoft.com/beta/roleManagement/directory/roleAssignments' -Method POST -ContentType 'Application/json' -Body $GroupBody -Headers $Headers
 
-#New-AccountTrace -AccountID $($CreateUserResult.id) -ExpectedGroups $AddGroupResult.id
+#New-AccountTrace -AccountID $($CreateUserResult.id) -ExpectedGroups $AddGroupResult.id -AccountInfo  -Displayname $Account['displayname'] -mailNickname $Account['mail'] -userPrincipalName $account['UPN']
 New-output -ReturnedBody "Success"
 }
 catch {
