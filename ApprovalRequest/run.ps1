@@ -8,14 +8,16 @@ Write-Host "PowerShell HTTP trigger function processed a request."
 $Account = [System.Web.HttpUtility]::ParseQueryString($Request.Body)
 try {
   $AccountReq = [PSCustomObject]@{
-    RequestName       = $Account['RequestName']
-    RequestedBy       = $Account['RequestedBy']
-    RequestType       = $Account['Type']
-    RequestTenant     = $Account['RequestTenant']
-    RequestedOn       = $Account['RequestDate']
-    RequestedUsername = $Account['RequestedUsername']
-    RequestedRole     = $Account['RequestedRole']
-    RequestStatus     = 'New'
+    RequestName         = $Account['RequestName']
+    RequestedBy         = $Account['RequestedBy']
+    RequestType         = $Account['Type']
+    RequestTenant       = $Account['RequestTenant']
+    RequestedOn         = $Account['RequestDate']
+    RequestedUsername   = $Account['RequestedUsername']
+    RequestedRole       = $Account['RequestedRole']
+    RequestedExpireDate = $account['RequestedExpireDate']
+    RequestedReason     = $account['RequestedReason']
+    RequestStatus       = 'New'
   }
 
   #Write request to Azure File Table / Cosmos

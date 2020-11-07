@@ -3,6 +3,6 @@
 #
 @{
     # For latest supported version, go to 'https://www.powershellgallery.com/packages/Az'. 
-    'Az' = '4.*'
     'PartnerCenter' = '3.*'
+    'AzTable' = '2.*'
 }
