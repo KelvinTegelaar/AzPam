@@ -33,5 +33,13 @@ function Get-AzPAMTable($Table) {
     return $ReturnData
 }
 
+function Update-AzPAMTable($Table,$NewData) {
+    $StorageAccountname = (($ENV:WEBSITE_CONTENTAZUREFILECONNECTIONSTRING) -split '=' -split ';')[3]
+    $TableContext = (Get-AzStorageAccount | where-object { $_.StorageAccountName -eq $StorageAccountName }).Context
+    $CloudTable = (Get-AzStorageTable -Name $Table -Context $TableContext).CloudTable
+    $ReturnData =   $NewData | Update-AzTableRow -table $cloudTable
+    return $ReturnData
+}
+
 #notes: Need to create account table. Need to see about adding tables via deployment json. Need to remember to add Managed identity and permissions via deployment json.
 #Need to add keyvault for keys and passwords.
