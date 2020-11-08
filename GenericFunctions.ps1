@@ -2,7 +2,7 @@ function New-output ($ReturnedBody) {
     Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
             StatusCode  = [HttpStatusCode]::OK
             Body        = $ReturnedBody
-            ContentType = 'text/json'
+            ContentType = 'text/html'
         }) 
 }
 
@@ -33,3 +33,5 @@ function Get-AzPAMTable($Table) {
     return $ReturnData
 }
 
+#notes: Need to create account table. Need to see about adding tables via deployment json. Need to remember to add Managed identity and permissions via deployment json.
+#Need to add keyvault for keys and passwords.
