@@ -21,9 +21,10 @@ try {
   }
 
   Write-AzPAMTable -Table "Requests" -Data $AccountReq
+  Write-AzPAMLogTable -type "Info" -Message "Requested new account for $($Account['Tenant'])" -SourceAccount "$($Account['RequestedBy'])"
 }
 catch {
-  Add-Content -path $ENV:ErrorLog -Value "$($currentUTCtime): Could not create new O365 JIT Account. Error:  $($_.Exception.Message)" -Force
+  Write-AzPAMLogTable -type "Error" -Message "Could not create account request. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM"
   New-output -ReturnedBody "Request Failure: $($_.Exception.Message)"
   break
 }

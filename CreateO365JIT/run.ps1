@@ -19,7 +19,7 @@ try {
   $headers = @{ "Authorization" = "Bearer $($ClientToken.access_token)" }
 }
 catch {
-  Add-Content -path $ENV:ErrorLog -Value "$($currentUTCtime): Could not create new O365 JIT Account. Error:  $($_.Exception.Message)" -Force
+  Write-AzPAMLogTable -type "Error" -Message "Could not login to Azure Graph. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM"
   New-output -ReturnedBody "Graph Login Failure: $($_.Exception.Message)"
   break
 }
@@ -38,7 +38,7 @@ try {
   $CreateUserResult = Invoke-RestMethod -Uri 'https://graph.microsoft.com/v1.0/users' -ContentType 'Application/json' -Method POST -Body $CreateBody -Headers $Headers
 }
 catch {
-  Add-Content -path $ENV:ErrorLog -Value "$($currentUTCtime): Could not create new O365 JIT Account. Error:  $($_.Exception.Message)" -Force
+  Write-AzPAMLogTable -type "Error" -Message "Could not add user. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM"
   New-output -ReturnedBody "User Add Failure: $($_.Exception.Message)"
   break
 }
@@ -56,7 +56,7 @@ $AddGroupResult = Invoke-RestMethod -Uri 'https://graph.microsoft.com/beta/roleM
 New-output -ReturnedBody "Success"
 }
 catch {
-  Add-Content -path $ENV:ErrorLog -Value "$($currentUTCtime): Could not create new O365 JIT Account. Error:  $($_.Exception.Message)" -Force
+  Write-AzPAMLogTable -type "Error" -Message "Could not add account to group. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM"
   New-output -ReturnedBody "Group Add Failure: $($_.Exception.Message)"
   break
 }
