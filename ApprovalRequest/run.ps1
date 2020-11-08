@@ -20,7 +20,7 @@ try {
     RequestStatus       = 'New'
   }
 
-  #Write request to Azure File Table / Cosmos
+  Write-AzPAMTable -Table "Requests" -Data $AccountReq
 }
 catch {
   Add-Content -path $ENV:ErrorLog -Value "$($currentUTCtime): Could not create new O365 JIT Account. Error:  $($_.Exception.Message)" -Force
