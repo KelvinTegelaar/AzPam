@@ -1,53 +1,61 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AzPam 0.0.1</title>
-        <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link type="text/css" href="css/theme.css" rel="stylesheet">
-        <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
-        <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
-            rel='stylesheet'>
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="span3">
-                        <div class="sidebar">
-                            <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.html"><i class="menu-icon icon-dashboard"></i>Dashboard
-                                </a></li>
-                                <li><a href="NewRequest.html"><i class="menu-icon icon-bullhorn"></i>New Account Request </a>
-                                </li>
-                                <li><a href="OpenRequests.html"><i class="menu-icon icon-inbox"></i>Open Requests <b class="label green pull-right">
-                                    11</b> </a></li>
-                                <li><a href="AccountManagement.html"><i class="menu-icon icon-tasks"></i>Account Management <b class="label orange pull-right">
-                                    19</b> </a></li>
-                            </ul>
-                            <!--/.widget-nav-->
-                            
-                            
-                            <ul class="widget widget-menu unstyled">
-                                <li><a class="collapsed" data-toggle="collapse" href="#togglePages"><i class="menu-icon icon-cog">
-                                </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                                </i>Settings </a>
-                                    <ul id="togglePages" class="collapse unstyled">
-                                        <li><a href="other-login.html"><i class="icon-inbox"></i>Azure Function </a></li>
-                                        <li><a href="other-user-profile.html"><i class="icon-inbox"></i>Keyvault </a></li>
-                                        <li><a href="other-user-listing.html"><i class="icon-inbox"></i> API Keys </a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#"><i class="menu-icon icon-signout"></i>Logout </a></li>
-                            </ul>
-                        </div>
-                        <!--/.sidebar-->
-                    </div>
-                    <!--/.span3-->
-                				<div class="span9">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>AzPam 0.0.1</title>
+		<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link type="text/css" href="css/theme.css" rel="stylesheet">
+		<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+		<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
+			rel='stylesheet'>
+	</head>
+
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span3">
+					<div class="sidebar">
+						<ul class="widget widget-menu unstyled">
+							<li class="active"><a href="index.html"><i class="menu-icon icon-dashboard"></i>Dashboard
+								</a></li>
+							<li><a href="NewRequest.html"><i class="menu-icon icon-bullhorn"></i>New Account Request
+								</a>
+							</li>
+							<li><a href="OpenRequests.html"><i class="menu-icon icon-inbox"></i>Open Requests <b
+										class="label green pull-right">
+										11</b> </a></li>
+							<li><a href="AccountManagement.html"><i class="menu-icon icon-tasks"></i>Account Management
+									<b class="label orange pull-right">
+										19</b> </a></li>
+						</ul>
+						<!--/.widget-nav-->
+
+
+						<ul class="widget widget-menu unstyled">
+							<li><a class="collapsed" data-toggle="collapse" href="#togglePages"><i
+										class="menu-icon icon-cog">
+									</i><i class="icon-chevron-down pull-right"></i><i
+										class="icon-chevron-up pull-right">
+									</i>Settings </a>
+								<ul id="togglePages" class="collapse unstyled">
+									<li><a href="other-login.html"><i class="icon-inbox"></i>Azure Function </a></li>
+									<li><a href="other-user-profile.html"><i class="icon-inbox"></i>Keyvault </a></li>
+									<li><a href="other-user-listing.html"><i class="icon-inbox"></i> API Keys </a></li>
+								</ul>
+							</li>
+							<li><a href="#"><i class="menu-icon icon-signout"></i>Logout </a></li>
+						</ul>
+					</div>
+					<!--/.sidebar-->
+				</div>
+				<!--/.span3-->
+				<div class="span9">
 					<div class="content">
 
 						<div class="module message">
@@ -74,43 +82,18 @@
 									</div>
 								</div>
 								<div class="pull-right">
-									<a href="#" class="btn btn-primary">New Request</a>
+									<a href="NewRequest.html" class="btn btn-primary">New Request</a>
 								</div>
 							</div>
-							<div class="module-body table">								
+							<div class="module-body table">
 
 								<table class="table table-message">
-									<tbody>
-										<tr class="heading">
-											<td class="cell-icon"></td>
-											<td class="cell-title">Request</td>
-											<td class="cell-status hidden-phone hidden-tablet">Status</td>
-											<td class="cell-time align-right">Request Date</td>
-										</tr>
-										<tr class="task">
-											<td class="cell-icon"><i class="icon-checker high"></i></td>
-											<td class="cell-title"><div>Requested local administrator credentials for server DC01 at client JohnDoe Manafacturing.</div></td>
-											<td class="cell-status hidden-phone hidden-tablet"><b class="due">Open</b></td>
-											<td class="cell-time align-right">Just Now</td>
-										</tr>
-										<tr class="task">
-											<td class="cell-icon"><i class="icon-checker high"></i></td>
-											<td class="cell-title"><div>Requested local administrator credentials for server DC01 at client JohnDoe Manafacturing.</div></td>
-											<td class="cell-status hidden-phone hidden-tablet"><b class="due">Open</b></td>
-											<td class="cell-time align-right">Just Now</td>
-										</tr>
-										<tr class="task">
-											<td class="cell-icon"><i class="icon-checker high"></i></td>
-											<td class="cell-title"><div>Requested local administrator credentials for server DC01 at client JohnDoe Manafacturing.</div></td>
-											<td class="cell-status hidden-phone hidden-tablet"><b class="due">Open</b></td>
-											<td class="cell-time align-right">Just Now</td>
-										</tr>
-										<tr class="task resolved">
-											<td class="cell-icon"><i class="icon-checker high"></i></td>
-											<td class="cell-title"><div>Requested local administrator credentials for server DC01 at client JohnDoe Manafacturing.</div></td>
-											<td class="cell-status hidden-phone hidden-tablet"><b class="due">Granted</b></td>
-											<td class="cell-time align-right">Just Now</td>
-										</tr>
+									<tr class="heading">
+										<td class="cell-title">Request</td>
+										<td class="cell-status hidden-phone hidden-tablet">Status</td>
+										<td class="cell-time align-right">Request Date</td>
+									</tr>
+									<tbody id="ReqTable">
 
 									</tbody>
 								</table>
@@ -120,25 +103,40 @@
 							<div class="module-foot">
 							</div>
 						</div>
-						
-					</div><!--/.content-->
-				</div><!--/.span9-->
-                </div>
-            </div>
-            <!--/.container-->
-        </div>
-        <!--/.wrapper-->
-        <div class="footer">
-            <div class="container">
-                <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
-            </div>
-        </div>
-        <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-        <script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-        <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
-        <script src="scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
-        <script src="scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
-        <script src="scripts/common.js" type="text/javascript"></script>
-      
-    </body>
+
+					</div>
+					<!--/.content-->
+				</div>
+				<!--/.span9-->
+			</div>
+		</div>
+		<!--/.container-->
+	</div>
+	<!--/.wrapper-->
+	<div class="footer">
+		<div class="container">
+			<b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
+		</div>
+	</div>
+	<script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
+	<script src="scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
+	<script src="scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+	<script>
+		(async function () {
+			var jsonresult = await (await fetch(`GetAzPamTable?Table=Requests`)).json();
+			var table = document.getElementById('ReqTable');
+			jsonresult.forEach(function (object) {
+				var tr = document.createElement('tr');
+				tr.innerHTML = '<td>' + object.RequestName + '</td>' +
+					'<td class=cell-status hidden-phone hidden-tablet><b class="due">' + object.RequestStatus + '</b></td>' +
+					'<td>' + object.DateTime + '</td>';
+				table.appendChild(tr);
+			});
+		}())
+
+	</script>
+
+</body>

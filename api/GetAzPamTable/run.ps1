@@ -2,15 +2,21 @@ using namespace System.Net
 param($Request, $TriggerMetadata)
 . .\GenericFunctions.ps1
 
-$Table = $Request.Body.Query.Table
+$Table = $Request.Query.Table
+$AccountID = $Request.Query.FilterID
 #Add filter option
 try {
- $Requests =  Get-AzPAMTable -Table $Table | Select-object * -ExcludeProperty PartitionKey,RowKey,TableTimeStamp,Etag |  convertto-html -Fragment | Out-String
-  new-output $Requests
+  if ($AccountID) {
+    $Requests = Get-AzPAMTable -Table $Table | Select-object * -ExcludeProperty PartitionKey, RowKey, TableTimeStamp, Etag | Where-Object { $_.UniqueID -eq $AccountID }
+  }
+  else {
+    $Requests = Get-AzPAMTable -Table $Table | Select-object * -ExcludeProperty PartitionKey, RowKey, TableTimeStamp, Etag
+  }
+  new-output [array]$Requests
 }
 catch {
-  Add-Content -path $ENV:ErrorLog -Value "$($currentUTCtime): Could not create new O365 JIT Account. Error:  $($_.Exception.Message)" -Force
-  New-output -ReturnedBody "Group Add Failure: $($_.Exception.Message)"
+  Write-AzPAMLogTable -type "Error" -Message "Could not get Azure Table $($_.Exception.Message)" -SourceAccount "SYSTEM"
+  New-output -ReturnedBody "Failed: $($_.Exception.Message)"
   break
 }
 
