@@ -124,21 +124,26 @@
             $(document).ready(function () {
                 $('.datatable-1').dataTable(
                     {
-					"ajax": {
-					"url": "GetAzPamTable?Table=Accounts",
-					"dataSrc": ""
-					},
+                        "ajax": {
+                            "url": "GetAzPamTable?Table=Accounts",
+                            "dataSrc": function (json) {
+                                for (var i = 0, ien = json.length; i < ien; i++) {
+                                    json[i]['UniqueID'] = '<a href="accountinfo.html?ID=' + json[i]['UniqueID'] + '"> <b class="btn"> <i class="icon-key shaded"> </i>Manage</a></b>';
+                                }
+                                return json;
+                            }
+                        },
                         "columns": [
                             { "data": "TenantID" },
                             { "data": "Username" },
                             { "data": "Type" },
                             { "data": "Role" },
-                            { "data": "Manage" },
+                            { "data": "UniqueID" },
                         ],
                         "columnDefs": [{
                             "targets": -1,
                             "data": null,
-                            "defaultContent": '<b class="btn"><i class="icon-key shaded"></i>Manage</b>'
+                            "defaultContent": ''
                         }]
 
                     });
@@ -148,5 +153,6 @@
                 $('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
             });
         </script>
+
 
 </body>

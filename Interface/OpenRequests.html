@@ -76,7 +76,7 @@
 											<li><a href="#">Denied</a></li>
 											<li><a href="#">Granted</a></li>
 											<li class="divider"></li>
-											<li><a href="#">New Request</a></li>
+											<li><a href="NewRequest.html">New Request</a></li>
 											<li><a href="#">Delete Request</a></li>
 										</ul>
 									</div>
@@ -87,15 +87,29 @@
 							</div>
 							<div class="module-body table">
 
-								<table class="table table-message">
-									<tr class="heading">
-										<td class="cell-title">Request</td>
-										<td class="cell-status hidden-phone hidden-tablet">Status</td>
-										<td class="cell-time align-right">Request Date</td>
-									</tr>
-									<tbody id="ReqTable">
-
+								<table cellpadding="0" cellspacing="0" class="datatable-1 table table-bordered  table-striped display" width="100%">
+									<thead>
+										<tr>
+											<th>Tenant Name</th>
+											<th>Request Name</th>
+											<th>Requested by</th>
+											<th>Requested Role</th>
+											<th>Requested Status</th>
+											<th>Manage</th>
+										</tr>
+									</thead>
+									<tbody id='AccountTable'>
 									</tbody>
+									<tfoot>
+										<tr>
+											<th>Tenant Name</th>
+											<th>Request Name</th>
+											<th>Requested by</th>
+											<th>Requested Role</th>
+											<th>Requested Status</th>
+											<th>Manage</th>
+										</tr>
+									</tfoot>
 								</table>
 
 
@@ -125,18 +139,39 @@
 	<script src="scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
 	<script src="scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
 	<script>
-		(async function () {
-			var jsonresult = await (await fetch(`GetAzPamTable?Table=Requests`)).json();
-			var table = document.getElementById('ReqTable');
-			jsonresult.forEach(function (object) {
-				var tr = document.createElement('tr');
-				tr.innerHTML = '<td>' + object.RequestName + '</td>' +
-					'<td class=cell-status hidden-phone hidden-tablet><b class="due">' + object.RequestStatus + '</b></td>' +
-					'<td>' + object.DateTime + '</td>';
-				table.appendChild(tr);
-			});
-		}())
+		$(document).ready(function () {
+			$('.datatable-1').dataTable(
+				{
+					"ajax": {
+						"url": "GetAzPamTable?Table=Requests",
+						"dataSrc": function (json) {
+							for (var i = 0, ien = json.length; i < ien; i++) {
+								json[i]['UniqueID'] = '<a href="RequestInfo.html?ID=' + json[i]['UniqueID'] + '"> <b class="btn"> <i class="icon-key shaded"> </i>Manage</a></b>';
+							}
+							return json;
+						}
+					},
+					"columns": [
+						{ "data": "RequestTenant" },
+						{ "data": "RequestName" },
+						{ "data": "RequestedBy" },
+						{ "data": "RequestedRole" },
+						{ "data": "RequestStatus" },
+						{ "data": "UniqueID" },
+					],
+					"columnDefs": [{
+						"targets": -1,
+						"data": null,
+						"defaultContent": ''
+					}]
 
+				});
+			$('.dataTables_paginate').addClass("btn-group datatable-pagination");
+			$('.dataTables_paginate > a').wrapInner('<span />');
+			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
+			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
+		});
 	</script>
+
 
 </body>
