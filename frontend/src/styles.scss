@@ -1,0 +1,47 @@
+@import "./variables"; 
+@import "../node_modules/bootswatch/dist/slate/bootswatch";
+
+#wrapper {
+    overflow-x: hidden;
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+ }
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    display: block;
+    .ng-fa-icon {
+        margin-right: 10px;
+    }
+    .badge {
+        float: right;
+        margin-top: 3px;
+    }
+    .nav-space {
+        margin-top: 10px;
+    }
+}
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s
+}
+.dashboard-container {
+    .card {
+        width: 20rem;
+        text-align: center;
+        float: left;
+        margin: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+        .card-body .ng-fa-icon {
+            font-size: 48px;
+            line-height: 48px;
+            height: 48px;
+        }
+    }
+}
