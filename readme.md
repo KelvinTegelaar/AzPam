@@ -16,17 +16,17 @@ I ain't no frontend developer, would love help but am currently thinking of usin
 
 ## Backend Tasks
 
-- [ ]Add creation API local user
-- [ ]Add Approval request workflow
-- [ ]Add Deletion/Disablement workflow
-- [ ]Add Account Tracing
-- [ ]Add new tenant creation and custom API keys per tenant
-- [ ]Generate client with Ps2exec in case you want to run it as service, instead of RMM
+- [ ] Add creation API local user
+- [ ] Add Approval request workflow
+- [ ] Add Deletion/Disablement workflow
+- [ ] Add Account Tracing
+- [ ] Add new tenant creation and custom API keys per tenant
+- [ ] Generate client with Ps2exec in case you want to run it as service, instead of RMM
 
 ## Frontend Tasks
 
-- [ ]Add Post as JSON to account request page with nice popup for confirmation success/failure
-- [ ]Add Instant Create button to account request page, for people with approval permission
-- [ ]Add nice image to account overview page
-- [ ]Put scripts in separate Js file and clean up? 
-- [ ]???
+- [ ] Add Post as JSON to account request page with nice popup for confirmation success/failure
+- [ ] Add Instant Create button to account request page, for people with approval permission
+- [ ] Add nice image to account overview page
+- [ ] Put scripts in separate Js file and clean up? 
+- [ ] ???
