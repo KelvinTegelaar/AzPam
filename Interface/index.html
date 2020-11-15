@@ -125,6 +125,7 @@
                     $('.datatable-1').dataTable(
                         {
                             "ajax": {
+							
                                 "url": "GetAzPamTable?Table=Logs",
                                 "dataSrc": "",
                             },
@@ -133,7 +134,8 @@
                                 { "data": "Message" },
                                 { "data": "CreatedBy" },
                                 { "data": "Type" },
-                            ]
+                            ],
+							"order": [[ 0, "desc" ]],
                         });
                     $('.dataTables_paginate').addClass("btn-group datatable-pagination");
                     $('.dataTables_paginate > a').wrapInner('<span />');
