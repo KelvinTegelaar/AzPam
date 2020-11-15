@@ -77,10 +77,10 @@
                                             The requested role is $Role.
                                         </p>
                                         <div class="profile-details muted">
-                                            <a href="$PasswordURL" class="btn"><i class="icon-key shaded"></i>Approve
+                                            <a href="ChangeRequest?ID=$ApprovalURL&Allow=true" class="btn"><i class="icon-key shaded"></i>Approve
                                                 Request
                                             </a>
-                                            <a href="#" class="btn"><i class="icon-remove shaded"></i>Deny Request
+                                            <a href="ChangeRequest?ID=$DenyURL&Allow=false" class="btn"><i class="icon-remove shaded"></i>Deny Request
                                             </a>
                                         </div>
                                     </div>
@@ -162,7 +162,6 @@
         });
     </script>
 
-
     <script>
         (async function () {
             const urlParams = new URLSearchParams(window.location.search);
@@ -174,6 +173,8 @@
                 document.body.innerHTML = document.body.innerHTML.replace('$RequestedBy', object.RequestBy);
                 document.body.innerHTML = document.body.innerHTML.replace('$RequestReason', object.ReasonCreated);
                 document.body.innerHTML = document.body.innerHTML.replace('$PasswordURL', object.PasswordURL);
+                document.body.innerHTML = document.body.innerHTML.replace('$ApprovalURL', object.AzPAMID);
+                document.body.innerHTML = document.body.innerHTML.replace('$DenyURL', object.AzPAMID);
             });
         }());
 

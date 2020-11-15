@@ -146,7 +146,7 @@
 						"url": "GetAzPamTable?Table=Requests",
 						"dataSrc": function (json) {
 							for (var i = 0, ien = json.length; i < ien; i++) {
-								json[i]['UniqueID'] = '<a href="RequestInfo.html?ID=' + json[i]['UniqueID'] + '"> <b class="btn"> <i class="icon-key shaded"> </i>Manage</a></b>';
+								json[i]['AzPAMID'] = '<a href="RequestInfo.html?ID=' + json[i]['AzPAMID'] + '"> <b class="btn"> <i class="icon-key shaded"> </i>Manage</a></b>';
 							}
 							return json;
 						}
@@ -157,7 +157,7 @@
 						{ "data": "RequestedBy" },
 						{ "data": "RequestedRole" },
 						{ "data": "RequestStatus" },
-						{ "data": "UniqueID" },
+						{ "data": "AzPAMID" },
 					],
 					"columnDefs": [{
 						"targets": -1,

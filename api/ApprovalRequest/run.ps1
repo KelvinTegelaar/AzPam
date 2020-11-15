@@ -5,20 +5,22 @@ param($Request, $TriggerMetadata)
 
 # Write to the Azure Functions log stream.
 Write-Host "PowerShell HTTP trigger function processed a request."
-$Account = [System.Web.HttpUtility]::ParseQueryString($Request.Body)
-  try {
-    $AccountReq = @{
-      RequestName         = $Account['RequestName']
-      RequestedBy         = $Account['RequestedBy']
-      RequestType         = $Account['RequestType']
-      RequestTenant       = $Account['RequestTenant']
-      RequestedOn         = $Account['RequestedOn']
-      RequestedUsername   = $Account['RequestedUsername']
-      RequestedRole       = $Account['RequestedRole']
-      RequestedExpireDate = $account['RequestedExpireDate']
-      RequestedReason     = $account['RequestedReason']
-      RequestStatus       = 'New'
-    }
+if ($null -eq $Request.headers.'X-MS-CLIENT-PRINCIPAL-NAME') { $User = "Unknown" } else { $User = $Request.headers.'X-MS-CLIENT-PRINCIPAL-NAME' }
+$account = $Request.body | ConvertFrom-Json 
+try {
+  $AccountReq = @{
+    RequestName         = $Account.RequestName
+    RequestedBy         = $User
+    RequestType         = $Account.RequestType
+    RequestTenant       = $Account.RequestTenant
+    RequestedOn         = (Get-Date).ToUniversalTime()
+    RequestedUsername   = $Account.RequestedUsername
+    RequestedRole       = $Account.RequestedRole
+    RequestedExpireDate = $Account.RequestedExpireDate
+    RequestedReason     = $Account.RequestedReason
+    RequestStatus       = 'New'
+    AzPAMID             = (New-Guid).guid
+  }
   Write-AzPAMTable -Table "Requests" -Data $AccountReq
   Write-AzPAMLogTable -type "Info" -Message "Requested new account for $($AccountReq.RequestTenant)" -SourceAccount "$($accountreq.RequestedBy)"
 }
@@ -28,4 +30,4 @@ catch {
   break
 }
 
-New-output -ReturnedBody "Succesfully created request"
+New-output -ReturnedBody 'Succesfully created new request.'

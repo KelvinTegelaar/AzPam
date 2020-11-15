@@ -10,17 +10,17 @@ function Write-AzPAMTable($Table, $Data) {
     $StorageAccountname = (($ENV:WEBSITE_CONTENTAZUREFILECONNECTIONSTRING) -split '=' -split ';')[3]
     $TableContext = (Get-AzStorageAccount | where-object { $_.StorageAccountName -eq $StorageAccountName }).Context
     $CloudTable = (Get-AzStorageTable -Name $Table -Context $TableContext).CloudTable
-    $NewRowKey = [int64](Get-AzTableRow -table $CloudTable | Select-Object -Last 1).RowKey + 1
+    $NewRowKey = [int64]((Get-AzTableRow -table $CloudTable).rowkey |  Sort-Object {[int]$_} | Select-Object -Last 1) + 1
     $ReturnData = Add-AzTableRow -Table $CloudTable -property $Data -partitionKey 'partition1' -rowkey  $NewRowKey
     return $ReturnData
 }
 
 function Write-AzPAMLogTable ($Type, $Message, $SourceAccount) {
     $DateTime = (Get-Date).ToUniversalTime()
-    $StorageAccountname = (($ENV:WEBSITE_CONTENTAZUREFILECONNECTIONSTRING) -split '=' -split ';')[3]
+    $StorageAccountname = 'storageaccountazpam81ca'
     $TableContext = (Get-AzStorageAccount | where-object { $_.StorageAccountName -eq $StorageAccountName }).Context
     $CloudTable = (Get-AzStorageTable -Name 'Logs' -Context $TableContext).CloudTable
-    $NewRowKey = [int64](Get-AzTableRow -table $CloudTable | Select-Object -Last 1).RowKey + 1
+    $NewRowKey = [int64]((Get-AzTableRow -table $CloudTable).rowkey |  Sort-Object {[int]$_} | Select-Object -Last 1) + 1
     $ReturnData = Add-AzTableRow -Table $CloudTable -property @{ 'Type' = $Type; 'Message' = $Message; "DateTime" = $DateTime; 'CreatedBy' = $SourceAccount } -partitionKey 'partition2' -rowkey $NewRowKey
     return $ReturnData
 }

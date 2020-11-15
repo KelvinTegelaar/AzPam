@@ -12,7 +12,7 @@ try {
   else {
     $Requests = Get-AzPAMTable -Table $Table | Select-object * -ExcludeProperty PartitionKey, RowKey, TableTimeStamp, Etag
   }
-  new-output [array]$Requests
+  new-output ([array]$Requests | convertto-json)
 }
 catch {
   Write-AzPAMLogTable -type "Error" -Message "Could not get Azure Table $($_.Exception.Message)" -SourceAccount "SYSTEM"
