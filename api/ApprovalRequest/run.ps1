@@ -22,10 +22,10 @@ try {
     AzPAMID             = (New-Guid).guid
   }
   Write-AzPAMTable -Table "Requests" -Data $AccountReq
-  Write-AzPAMLogTable -type "Info" -Message "Requested new account for $($AccountReq.RequestTenant)" -SourceAccount "$($accountreq.RequestedBy)"
+  Write-AzPAMLogTable -type "Info" -Message "Requested new account for $($AccountReq.RequestTenant)" -SourceAccount "$($accountreq.RequestedBy)" -AzPAMID $AccountReq.AzPAMID
 }
 catch {
-  Write-AzPAMLogTable -type "Error" -Message "Could not create account request. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM"
+  Write-AzPAMLogTable -type "Error" -Message "Could not create account request. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM" -AzPAMID $AccountReq.AzPAMID
   New-output -ReturnedBody "Request Failure: $($_.Exception.Message)"
   break
 }

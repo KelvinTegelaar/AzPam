@@ -38,7 +38,7 @@ try {
   $CreateUserResult = Invoke-RestMethod -Uri 'https://graph.microsoft.com/v1.0/users' -ContentType 'Application/json' -Method POST -Body $CreateBody -Headers $Headers
 }
 catch {
-  Write-AzPAMLogTable -type "Error" -Message "Could not add user. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM"
+  Write-AzPAMLogTable -type "Error" -Message "Could not add user. Error:  $($_.Exception.Message)" -SourceAccount "SYSTEM" -AzPAMID $AzPAMID
   New-output -ReturnedBody "User Add Failure: $($_.Exception.Message)"
   break
 }

@@ -3,19 +3,19 @@ param($Request, $TriggerMetadata)
 . .\GenericFunctions.ps1
 
 $Table = $Request.Query.Table
-$AccountID = $Request.Query.FilterID
+$AzPAMID = $Request.Query.FilterID
 #Add filter option
 try {
-  if ($AccountID) {
-    $Requests = Get-AzPAMTable -Table $Table | Select-object * -ExcludeProperty PartitionKey, RowKey, TableTimeStamp, Etag | Where-Object { $_.UniqueID -eq $AccountID }
+  if ($AzPAMID) {
+    $Requests = Get-AzPAMTable -Table $Table | Sort-Object -Property TableTimeStamp -Descending | Select-object * -ExcludeProperty PartitionKey, RowKey, TableTimeStamp, Etag | Where-Object { $_.AzPAMID -eq $AzPAMID }
   }
   else {
-    $Requests = Get-AzPAMTable -Table $Table | Select-object * -ExcludeProperty PartitionKey, RowKey, TableTimeStamp, Etag
+    $Requests = Get-AzPAMTable -Table $Table | Sort-Object -Property TableTimeStamp -Descending | Select-object * -ExcludeProperty PartitionKey, RowKey, TableTimeStamp, Etag
   }
-  new-output ([array]$Requests | convertto-json)
+  new-output (convertto-json ([array]$Requests))
 }
 catch {
-  Write-AzPAMLogTable -type "Error" -Message "Could not get Azure Table $($_.Exception.Message)" -SourceAccount "SYSTEM"
+  Write-AzPAMLogTable -type "Error" -Message "Could not get Azure Table $($_.Exception.Message)" -SourceAccount "SYSTEM" -AzPAMID $AzPAMID
   New-output -ReturnedBody "Failed: $($_.Exception.Message)"
   break
 }

@@ -72,7 +72,7 @@
                                             This account was created by request of $RequestedBy. </br>
                                             The reason for request given was: $RequestReason </br>
                                             </br>
-                                            The requested expire date is $ExpireDate.
+                                            The requested expire date is $ExpireDate days after approval.
                                             </br>
                                             The requested role is $Role.
                                         </p>
@@ -135,25 +135,14 @@
             $('.datatable-1').dataTable(
                 {
                     "ajax": {
-                        "url": "GetAzPamTable?Table=RequestLogs?ID=" + myParam,
-                        "dataSrc": function (json) {
-                            for (var i = 0, ien = json.length; i < ien; i++) {
-                                json[i]['UniqueID'] = '<a href="accountinfo.html?ID=' + json[i]['UniqueID'] + '"> <b class="btn"> <i class="icon-key shaded"> </i>Manage</a></b>';
-                            }
-                            return json;
-                        }
+                        "url": "https://azpam01.azurewebsites.net/GetAzPamTable?Table=Logs&FilterID=" + myParam,
+						"dataSrc": "",
                     },
                     "columns": [
-                        { "data": "Date" },
-                        { "data": "Action" },
-                        { "data": "User" },
-                    ],
-                    "columnDefs": [{
-                        "targets": -1,
-                        "data": null,
-                        "defaultContent": ''
-                    }]
-
+                        { "data": "DateTime" },
+                        { "data": "Message" },
+                        { "data": "CreatedBy" },
+                    ]
                 });
             $('.dataTables_paginate').addClass("btn-group datatable-pagination");
             $('.dataTables_paginate > a').wrapInner('<span />');
@@ -166,13 +155,14 @@
         (async function () {
             const urlParams = new URLSearchParams(window.location.search);
             const myParam = urlParams.get('ID');
-            var jsonresult = await (await fetch(`GetAzPamTable?Table=Accounts&FilterID=` + myParam)).json();
+            var jsonresult = await (await fetch(`GetAzPamTable?Table=Requests&FilterID=` + myParam)).json();
             jsonresult.forEach(function (object) {
-                document.body.innerHTML = document.body.innerHTML.replace('$Username', object.Username);
-                document.body.innerHTML = document.body.innerHTML.replace('$Tenant', object.TenantID);
-                document.body.innerHTML = document.body.innerHTML.replace('$RequestedBy', object.RequestBy);
-                document.body.innerHTML = document.body.innerHTML.replace('$RequestReason', object.ReasonCreated);
-                document.body.innerHTML = document.body.innerHTML.replace('$PasswordURL', object.PasswordURL);
+                document.body.innerHTML = document.body.innerHTML.replace('$Username', object.RequestedUsername);
+                document.body.innerHTML = document.body.innerHTML.replace('$Tenant', object.RequestedTenantID);
+                document.body.innerHTML = document.body.innerHTML.replace('$RequestedBy', object.RequestedBy);
+                document.body.innerHTML = document.body.innerHTML.replace('$RequestReason', object.RequestedReason);
+                document.body.innerHTML = document.body.innerHTML.replace('$ExpireDate', object.RequestedExpireDate);
+			    document.body.innerHTML = document.body.innerHTML.replace('$Role', object.RequestedRole);
                 document.body.innerHTML = document.body.innerHTML.replace('$ApprovalURL', object.AzPAMID);
                 document.body.innerHTML = document.body.innerHTML.replace('$DenyURL', object.AzPAMID);
             });
