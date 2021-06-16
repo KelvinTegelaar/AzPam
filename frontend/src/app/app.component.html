@@ -1,0 +1,34 @@
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+  <nav id="sidebar" class="bg-primary">
+    <div class="sidebar-header">
+      <h3>Az PAM</h3>
+    </div>
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action active" href="#">
+        <fa-icon [icon]="faTachometerAlt"></fa-icon>Dashboard
+      </a>
+      <a class="list-group-item list-group-item-action" href="#">
+        <fa-icon [icon]="faBullhorn"></fa-icon>New Account Request
+      </a>
+      <a class="list-group-item list-group-item-action" href="#">
+        <fa-icon [icon]="faInbox"></fa-icon>Open Requests
+        <span class="badge badge-pill badge-success">11</span>
+      </a>
+      <a class="list-group-item list-group-item-action" href="#">
+        <fa-icon [icon]="faTasks"></fa-icon>Account Management
+        <span class="badge badge-pill badge-danger">19</span>
+      </a>
+      <a class="list-group-item list-group-item-action nav-space" href="#">
+        <fa-icon [icon]="faCog"></fa-icon>Settings
+      </a>
+      <a class="list-group-item list-group-item-action" href="#">
+        <fa-icon [icon]="faSignOutAlt"></fa-icon>Logout
+      </a>
+    </div>
+  </nav>
+  <!-- Page Content -->
+  <div id="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
